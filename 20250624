@@ -1,0 +1,390 @@
+css 실습
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .image-box {
+      width: 320px;
+      height: 320px;
+      background-image: url(ae952014cdd66cc9657b0dc753deb0628a21778a.jpg); 
+      background-position: center;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="image-box">
+    인테리어 디자인
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .image-box {
+      width: 320px;
+      height: 320px;
+      background-image: url(ae952014cdd66cc9657b0dc753deb0628a21778a.jpg); 
+      background-position: center;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="image-box">
+    인테리어 디자인
+  </div>
+</body>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <style>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 278;
+height: 160;
+top: 16px;
+left: 16px;
+border-radius: 8px;
+
+            background: #CA785C;
+
+        }
+
+        .hellow {
+            font-family: Inter;
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box"> </div><br>
+    <div class="hellow">안녕하세요!</div>
+</body>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 160;
+height: 278;
+top: 16px;
+left: 16px;
+border-radius: 16px;
+background: #CA785C;
+
+
+        }
+
+        .hellow {
+          font-family: Inter;
+font-weight: 700;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: -0.5%;
+color: #138A79;
+;
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box"> </div><br>
+    <div class="hellow">반갑습니다!</div>
+</body>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+           width: 160;
+height: 160;
+border-radius: 9999px;
+background: #CA785C;
+
+
+        }
+
+        .hellow {
+         font-family: Inter;
+font-weight: 700;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
+;
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box"> </div><br>
+    <div class="hellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;프로필</div>
+</body>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .layout {
+            width: 278;
+height: 160;
+top: 16px;
+left: 16px;
+border-radius: 8px;
+background: #CA785C;
+
+        }
+
+    .um {
+        width: 278;
+height: 120;
+
+
+
+    }
+        .picture {
+            font-family: Inter;
+font-weight: 700;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: 0%;
+
+color: #FFFFFF;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+    <img class="um" src="10d3b623470d38c14c6543d51273e9fd28a9fd7d.jpg">
+    <div class="picture"><br>&nbsp;&nbsp;&nbsp;안녕하세요!</div></div>
+
+</body>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .layout {
+            width: 160;
+height: 240;
+top: 16px;
+left: 16px;
+border-radius: 4px;
+
+background: #CA785C;
+
+        }
+
+    .um {
+        width: 160;
+height: 172;
+background-position: center;
+
+
+
+    }
+        .picture {
+            font-family: Inter;
+font-weight: 700;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: -0.5%;
+color: #FFFFFF;
+font-family: Inter;
+font-weight: 700;
+font-size: 16px;
+line-height: 100%;
+letter-spacing: -0.5%;
+
+
+
+         }
+        .line {
+            font-family: Inter;
+font-weight: 700;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: -0.5%;
+color: #FFFFFF;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+    <img class="um" src="a16fabed86eeb187c1e5f8823914fafb06da4634.jpg">
+    <div class="picture">인테리어란?</div>
+    <div class="line"><br><br>김작가 &nbsp; &n
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .layout {
+            width: 278;
+          height: 80;
+top: 16px;
+left: 16px;
+background: #CA785C;
+color: white;
+     font-weight: bold;   
+   display: flex ;
+align-items: center;
+      justify-content: center;
+}
+    </style>
+</head>
+<body>
+   <div class="layout">한여름</div>
+</body>
+</html>bsp;&nbsp;&nbsp;&nbsp;  2024.01.01</div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>계절 박스</title>
+  <style>
+    .season-box {
+      width: 320px;
+      height: 80px;
+      background-color: #CA785C;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="season-box">
+    봄&nbsp;&nbsp;여름&nbsp;&nbsp;가을&nbsp;&nbsp;겨울
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .image-box {
+      width: 320px;
+      height: 320px;
+      background-image: url(ae952014cdd66cc9657b0dc753deb0628a21778a.jpg);
+      background-position: center;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-box">
+    인테리어 디자인
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .container {
+        width: 320px;
+      height: 320px;
+      background-image: url(ae952014cdd66cc9657b0dc753deb0628a21778a.jpg);
+      background-position: center;
+    }
+
+.text {
+  color: white;;
+  font-weight: bold;
+}
+
+
+
+  </style>
+</head>
+<body>
+    <div class="container">
+  <h2 class="text">인테리어 디자인</h2>
+  <div class="circle lime"></div>
+  <div class="circle sky"></div>
+  <div class="circle pink"></div>
+</div>
+
+  
+</body>
+</html>
+</div>
+
+</body>
+</html>
+    .box {
+        width: 160;
+height: 160;
+top: 16px;
+left: 16px;
+border-radius: 9999px;
+background: #FFB9B9;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+</body>
+</html>
