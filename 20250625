@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+            width: 500px;
+            height:50px ;
+        }
+
+        .nav {
+            height: 350px;
+            width: 100px;
+            vertical-align:top;
+        }
+
+        .section {
+            height: 350px;
+            width: 300px;
+            margin-left: -5px;
+        }
+
+        .article {
+            width: 250px;
+            height: 100px;
+            margin-left: 20px;
+            
+
+        }
+
+        .aside {
+            height: 350px;
+            width: 103px;
+           margin-left: -3px;
+            vertical-align: top;
+        }
+
+        .footer {
+            width: 500px;
+        }
+
+        .um { 
+            display: inline-block;
+        }
+
+        .ing {
+            flex-direction: column;
+            justify-content: center;
+
+            
+            
+        }
+
+       
+
+
+        .area1 {
+            background: blue;
+        }
+        .area2 {
+            background: red;
+        }
+        .area3 {
+            background: green;
+        }
+        .area4 {
+            background: aquamarine;
+        }
+        .area5 {
+            background: navy; 
+        }
+
+        .area6 {
+            background: yellowgreen;
+        }
+
+        .area7 {
+            background: pink;
+        }
+
+        .area8 {
+            background: white;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <h1>페이지 레이아웃 설정</h1>
+    <header class="header area1"><b>header</b></header>
+    <nav class="nav  area2 um"><b id="na">nav</b></nav>
+    <section class="section area3 um"><b>section</b>
+    <article class="article area6 ing">article</article>
+    <article class="article area7 ing">article</article>
+    <article class="article area8 ing">article</article></section>
+    <aside class="aside  area4 um" ><b id="as">aside</b></aside>
+    <footer class="footer  area5"><b> footer</b></footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+            width: 500px;
+            height: 45px;
+        }
+
+        .nav {
+            width: 400px;
+            margin-left: 45px;
+        }
+        .section {
+            width: 400px;
+            height: 300px;
+        }
+
+        .article {
+            width: 300px;
+            height: 80px;
+            margin-left: 50px;
+        }
+
+        .aside {
+            width: 100px;
+            height: 300px;
+            margin-left: -3px;
+            padding-top: 0px;
+            vertical-align: top;
+        }
+
+        .footer {
+            width: 500px;
+        }
+        .area1 {
+            background: blue;
+        }
+        .area2 {
+            background: red;
+        }
+        .area3 {
+            background: green;
+        }
+        .area4 {
+            background: aquamarine;
+        }
+        .area5 {
+            background: navy; 
+        }
+
+        .area6 {
+            background: yellowgreen;
+        }
+
+        .area7 {
+            background: pink;
+        }
+
+        .area8 {
+            background: white;
+        }
+        .um {
+            display:inline-block
+        }
+
+        .ing {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;}
+        
+    </style>
+</head>
+<body>
+     <h1>페이지 레이아웃 설정</h1>
+    <header class="header area1"><b>header</b>
+    <nav class="nav  area2 um"><b id="na">nav</b></nav></header>
+    <section class="section area3 um"><b>section</b>
+    <article class="article area6 ing">article</article>
+    <article class="article area7 ing">article</article>
+    <article class="article area8 ing">article</article></section>
+    <aside class="aside  area4 um" ><b id="as">aside</b></aside>
+    <footer class="footer  area5"><b> footer</b></footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .header {
+            width: 500px;
+            height: 45px;
+            
+            
+            
+        }
+
+        .nav {
+            width: 400px;
+            margin-left: 45px;
+            text-align: center;
+        }
+        .section {
+            width: 400px;
+            height: 300px;
+            text-align: center;
+        }
+
+        .article {
+            width: 300px;
+            height: 80px;
+            margin-left: 50px;
+        }
+
+        .aside {
+            width: 100px;
+            height: 300px;
+            margin-left: -3px;
+            padding-top: 0px;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .footer {
+            width: 500px;
+            text-align: center;
+        }
+        .area1 {
+            background: blue;
+        }
+        .area2 {
+            background: red;
+        }
+        .area3 {
+            background: green;
+        }
+        .area4 {
+            background: aquamarine;
+        }
+        .area5 {
+            background: navy; 
+        }
+
+        .area6 {
+            background: yellowgreen;
+        }
+
+        .area7 {
+            background: pink;
+        }
+
+        .area8 {
+            background: white;
+        }
+        .um {
+            display:inline-block
+        }
+
+        .ing {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;}
+        
+    </style>
+</head>
+<body>
+     <h1>페이지 레이아웃 설정</h1>
+    <header class="header area1"><b>header</b>
+    <nav class="nav  area2 um"><b id="na">nav</b></nav></header>
+    <section class="section area3 um"><b>section</b>
+    <article class="article area6 ing">article</article>
+    <article class="article area7 ing">article</article>
+    <article class="article area8 ing">article</article></section>
+    <aside class="aside  area4 um" ><b id="as">aside</b></aside>
+    <footer class="footer  area5"><b> footer</b></footer>
+</body>
+</html>
