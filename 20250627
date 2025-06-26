@@ -1,0 +1,64 @@
+1.변수
+1)number(숫자타입)-int,long,float,double 타입
+var integer = 10;
+
+console.log(integer);
+
+10
+
+2)string(문자열타입)-원시타입(변경불가능),('', "" ,``)로 텍스트 감쌈
+var string; // 변수 선언
+string = 'javascript';
+
+javascript
+
+3)boolean(논리 타입)-참,거짓을 나타냄
+var flag = true;
+console.log(flag);
+
+flag = false;
+console.log(flag);
+
+true
+false
+
+4)undefined and null- var 키워드로 선언한 변수는 암묵적으로 undefined로 초기화,null 타입의 값은 null
+var undef;
+console.log(undef);
+
+var nul = 'good';
+nul = null; 
+console.log(nul)
+
+undefined
+null
+
+5)symbol(원시타입,충돌위험 없음) and  object(number, string, boolean, undefined, null, symbol 6가지 데이터 타입 이외의 값은 모두 객체 타입)
+var key = Symbol('key');
+console.log(typeof key);
+
+obj[key] = 'value';
+console.log(obj[key]);
+
+symbol
+value
+
+2.동적타입언어
+동적 타입 언어는 변수 선언이 아닌 할당에 의해 타입이 결정(타입 추론)되며 재할당에 의해 변수의 타입은 언제든지 동적으로 변할 수 있다.
+
+3.암묵적타입언어
+1)문자열타입으로 변환
+console.log(10 + '20');
+1020
+2)숫자타입으로 전환
+console.log(10 - '5');   5
+console.log(10 * '5');      50
+console.log(10 / '2');    10
+console.log(10 % 'javascript');     NaN
+3)논리타입으로 변환
+false, undefiend, null, 0, NaN, ''(빈 문자열)은 Falsy 값이며 이 외의 모든 값은 Truthy 값이다.
+
+4.명시적타입변환
+1)문자열타입으로 변환
+2)숫자 타입으로 변환
+3)논리타입으로 변환
