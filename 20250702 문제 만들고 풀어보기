@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <ul id="food">
+        <li style="color">라면</li>
+        <li>김밥</li>
+        <li>햄버거</li>
+    </ul>
+
+    <script>
+        
+        const $food = document.getElementById('food');
+
+        const $pizza = document.createElement('li');
+        $pizza.textContent='피자';
+
+        $food.insertBefore($pizza,$food.children[1]);
+
+        const $newchild = document.createElement('li');
+        $newchild.textContent='치킨';
+        $food.replaceChild($newchild,$food.lastElementChild);
+
+        const $ramen = $food.firstElementChild;
+        $ramen.style.color='blue'
+
+
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>'남수'를 '남규'로 바꾸세요. <br>
+        '타노스'를 제거하세요. <br>
+        '진기명기'를 추가하세요.
+    </h3>
+    <ul id="gamer">
+        <li>남수</li>
+        <li>타노스</li>
+    </ul>
+
+    <script>
+        const $gamer = document.getElementById('gamer');
+        const $nam = document.createElement('li');
+        $nam.textContent='남규';
+        $gamer.replaceChild($nam,$gamer.firstElementChild)
+        $gamer.removeChild($gamer.lastElementChild)
+        const $finger = document.createElement('li')
+        $finger.textContent='진기명기';
+        $gamer.appendChild($finger)
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="textBox">글자 자리</p>
+
+    <script>
+        const $textBox = document.getElementById('textBox');
+        $textBox.style.color = 'red';
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <label>아무태그</label>
+    <input tpye='text' id="console" value="a">
+    
+    <script>
+        var $id = document.getElementById('console')
+        console.log($id)
+
+        // $id.style.backgroundColor = 'blue';
+
+        // $id.value='b';
+
+
+    </script>
+</body>
+</html>
