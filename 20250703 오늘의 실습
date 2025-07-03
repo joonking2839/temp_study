@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 20px;
+    }
+
+
+    input[type='text'],
+    select,
+    input[type='email'] {
+        width: 500px;
+        padding: 10px;
+        font-weight: bold;
+        display: block;
+        }
+
+    #ask {
+        height: 100px;
+        width: 500px;
+        resize: non;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #2196f3;
+      color: white;
+      border-color:white;}
+</style>
+<body>
+    <h1>사용자 입력 양식 이벤트 연습하기</h1>
+    <form id="page">
+        <label for="username" >이름</label>
+        <input type="text" name="username" id="username" placeholder="이름을 입력히세요" required>
+
+        <label for="email">이메일</label>
+        <input type="email" name="email" id="email" placeholder="example@domain.com" required>
+
+        <label for="gender">성별</label>
+        <input type="radio" name="gender" id="male" value="male"  style="margin: 5px;"><b>남자</b>
+        <input type="radio" name="gender" id="female" value="female"   style="margin: 5px;"><b>여자</b>
+
+        <label for="date">참여 일자 선택</label>
+        <select id="date">
+            <option value="">--날짜 선택--</option>
+            <option value="2025-07-1">2025-07-01</option>
+            <option value="2025-07-2">2025-07-02</option>
+            <option value="2025-07-3">2025-07-03</option>
+            <option value="2025-07-4">2025-07-04</option>
+            <option value="2025-07-5">2025-07-05</option>
+        </select>
+
+        <label for="ask">요청 사항</label>
+        <textarea name="ask" id="ask" placeholder="요청 사항을 입력하세요"></textarea>
+        <div class="count">0/500자</div>
+
+        <label for="checkbox"><input type="checkbox" name="checkbox" id="checkbox" required>개인정보 수집에 동의합니다</label>
+
+        <button type="submit">신청하기</button>
+
+         </form>
+</body>
+</html>
