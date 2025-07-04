@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h2>input 태그에 숫자를 입력하고 버튼을 클릭하면, +10이 된 값을 alert으로 출력해 주세요</h2>
+      <p>(input 값 : 5 -> alert으로 출력된 값 : 15)</p>
+
+      <input type="number" id="num">
+      <button id="button">클릭</button>
+
+      <script>
+        document.getElementById('button').addEventListener('click',()=>{
+            const Num = document.getElementById('num').value;
+            if(Num===''){
+                alert('숫자를 입력해 주세요!')
+                return;
+            }else {
+                alert(Number(Num)+10);
+            }
+        });
+        
+      </script>
+    
+</body>
+</html>
+=======================================================================================
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label {
+            display: block
+        }
+    </style>
+</head>
+<body>
+    <h1>라디오 버튼을 클릭하면 value 값을 이용해 해당 사이트로 이동해 주세요.</h1>
+    <p>(location.href이용)</p>
+    <label><input type="radio" id="site" value="https://www.naver.com/">네이버</label>
+    <label><input type="radio" id="site" value="https://www.google.com/">구글</label>
+    <input type="radio" id="site" value="https://www.w3schools.com/">w3schools
+
+    <script>
+        const radios = document.querySelectorAll('input[type="radio"]');
+
+        radios.forEach( (e) => {
+            e.addEventListener('click',()=>{
+             location.href=e.value;   
+            })
+        });
+
+
+
+    </script>
+</body>
+</html>
