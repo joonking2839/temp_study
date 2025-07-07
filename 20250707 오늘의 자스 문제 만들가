@@ -1,0 +1,17 @@
+let [name1="맛있는",name2="복",name3="분",name4="자"] = "곶감";
+let [,num2,num3]="갑툭튀"
+
+let kim = "김";
+let lee = "이";
+let park = "박";
+let choi = "최";
+
+[kim,lee,park,choi]=[park,lee,kim,choi];
+
+function sentence() {
+    console.log(`${name2} ${name4} ${num3} ${park}`);
+}
+
+sentence();
+
+//${}안에 적절한 변수를 넣어 콘솔로 감자튀김이 출력되게 해주세요.
