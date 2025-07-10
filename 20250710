@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="web2.css">
+</head>
+<body>
+  <figure>
+    <div id="svg-container""></div>
+  </figure>
+
+
+  <script>
+      let lastY = null; //반드시 여기에 선언  
+
+    fetch('character-default.svg')
+      .then(response => response.text())
+      .then(svg => {
+        document.getElementById('svg-container').innerHTML = svg;
+
+        const workout = [
+          'left-arm', 'right-arm', 'barbell-handle',
+          'left-hand', 'left-finger1', 'left-finger2', 'left-finger3', 'left-finger4', 'left-finger5', 'left-band',
+          'right-hand', 'right-finger1', 'right-finger2', 'right-finger3', 'right-finger4', 'right-finger5', 'right-band',
+          'right-barbell1', 'right-barbell2', 'left-barbell1', 'left-barbell2'
+        ];
+
+        const Body = [
+          'left-arm', 'right-arm', 'barbell-handle',
+          'left-hand', 'left-finger1', 'left-finger2', 'left-finger3', 'left-finger4', 'left-finger5', 'left-band',
+          'right-hand', 'right-finger1', 'right-finger2', 'right-finger3', 'right-finger4', 'right-finger5', 'right-band',
+          'right-barbell1', 'right-barbell2', 'left-barbell1', 'left-barbell2','left-chest','right-chest','cloths','left-ears','right-ears',
+          'body','shadow','angry1','angry2','angry3','angry4','left-ears2','right-ears2','head'
+
+      ]
+
+        workout.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.transition = 'transform 0.2s ease';
+        });
+
+        Body.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.transition='transform 0.2s ease'
+        })
+
+        // 마우스 이동 시 바벨 제어
+        document.addEventListener('mousemove', (e) => {
+          if (lastY === null) {
+            lastY = e.clientY;
+            return;
+          }
+
+          const deltaY = lastY - e.clientY;
+
+          if (deltaY > 30) {
+            raiseBarbell();
+          } else if (deltaY < -30) {
+            lowerBarbell();
+            growbody();
+          }
+
+          lastY = e.clientY;
+        });
+
+        function raiseBarbell() {
+          workout.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.transform = 'translateY(-100px)';
+          });
+        }
+
+        function lowerBarbell() {
+          workout.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.transform = 'translateY(150px)';
+          });
+        }
+
+        let bodyScale = 1.0;
+
+         function growbody() {
+          const maxScale = 1000000;
+          if (bodyScale>=maxScale) {
+            return;
+          }
+          bodyScale += 0.005;
+          updateBodyTransform();
+           const bodyGroup = document.getElementById('BODY');
+          if (bodyGroup) {
+            const cx = 600; // 중심점 x
+            const cy = 725; // 중심점 y (viewBox 기준)
+
+           // scale과 함께 중심 이동 보정 svg는 무조건 기준이 0.0부터 시작이라 중심점 보정을 해줘야 내가 원하는 곳에서 설정 가능
+              const offsetX = (1 - bodyScale) * cx;
+              const offsetY = (1 - bodyScale) * cy;
+              bodyGroup.setAttribute('transform', `translate(${offsetX}, ${offsetY}) scale(${bodyScale})`);
+            }}
+          });
+
+          //가만히 있으면 근손실 나기.제한시간안에 몸을 키워야됨
+          let muscleLossTimer = null;
+          function resetTimer() {
+            clearTimeout(muscleLossTimer);
+            muscleLossTimer = setTimeout(() => {
+              bodyScale = Math.max(1.0, bodyScale - 0.01);
+              updateBodyTransform();  
+              resetTimer(); // 계속 반복
+              }, 1000);
+}
+
+
+  </script>
+</body>
+
+</html>
