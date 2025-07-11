@@ -1,0 +1,75 @@
+--실패 페이지
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="web3.css">
+</head>
+<body class="gradient-background">
+    <header class="shadow-dance-container"><h1 class="shadow-dance-text">GAME OVER</h1></header>
+    <main id="main-page" class="main-page">
+          
+
+
+        <section class="main-box">
+            <button id="button" class="button">RESTART</button>
+            <button id="lobby" class="button">ROBBY</button>
+        </section>
+        <section>
+            <div></div>
+        </section>
+    </main>
+
+    <script>
+        const $button = document.getElementById('button')
+        $button.addEventListener('click',()=>{
+            window.location.href='2game.html';
+        })
+
+        const $lobby = document.getElementById('lobby')
+        $lobby.addEventListener('click',()=>{
+            window.location.href='1manu.html';
+        })
+    </script>
+</body>
+</html>
+
+--성공페이지
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="web4.css">
+</head>
+<body class="gradient-background">
+    <header class="shadow-dance-container"><h1 class="shadow-dance-text">SUCESS!</h1></header>
+    <main id="main-page" class="main-page">
+          
+
+
+        <section class="main-box">
+            <button id="button" class="button">RESTART</button>
+            <button id="lobby" class="button">ROBBY</button>
+        </section>
+        <section>
+            <div></div>
+        </section>
+    </main>
+
+    <script>
+        const $button = document.getElementById('button')
+        $button.addEventListener('click',()=>{
+            window.location.href='2game.html';
+        })
+
+        const $lobby = document.getElementById('lobby')
+        $lobby.addEventListener('click',()=>{
+            window.location.href='1manu.html';
+        })
+    </script>
+</body>
+</html>
