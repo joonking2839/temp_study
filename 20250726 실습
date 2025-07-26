@@ -1,0 +1,128 @@
+package com.ohgiraffers.Practice;
+
+import java.util.Scanner;
+
+public class Application {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("플레이어 이름 입력: ");
+        String name = sc.nextLine();
+
+        Fighter hero = new Hero(name);
+        Monster monster = new Monster();
+
+        while (!hero.isDead() && !monster.isDead()) {
+            hero.showStatus();
+            monster.showStatus();
+
+            System.out.println("1.공격  2.방어  3.회복  4.스킬");
+            int action = sc.nextInt();
+
+            switch (action) {
+                case 1 -> hero.attack(monster);
+                case 2 -> hero.defend(0);
+                case 3 -> hero.heal();
+                case 4 -> hero.useSkill(monster);
+                default -> System.out.println("잘못된 입력입니다.");
+            }
+
+            if (!monster.isDead()) {
+                monster.attack(hero);
+            }
+        }
+
+        if (hero.isDead()) {
+            System.out.println("게임 오버! 패배했습니다.");
+        } else {
+            System.out.println("승리! 몬스터를 쓰러뜨렸습니다.");
+        }
+    }
+}
+package com.ohgiraffers.Practice;
+
+public abstract class Fighter  {
+    public static int hp = 100;
+    public String name;
+    public boolean isDefending = false;
+
+    public Fighter(String name) {
+        this.name = name;
+    }
+
+    public void attack(Monster monster) {
+        System.out.println(name + "의 일반 공격!");
+        monster.takeDamage(20);
+    }
+
+    public void defend(int damage) {
+        isDefending = true;
+        System.out.println(name + "이(가) 방어 태세에 들어갔습니다!");
+    }
+
+    public void heal() {
+        hp += 15;
+        if (hp > 100) hp = 100;
+        System.out.println(name + "이(가) 회복! (HP: " + hp + ")");
+    }
+
+    public boolean isDead() {
+        return hp <= 0;
+    }
+
+    public void showStatus() {
+        System.out.println(name + " HP: " + hp);
+    }
+
+    public abstract void useSkill(Monster monster);
+}
+package com.ohgiraffers.Practice;
+
+public class Hero extends Fighter implements Skill {
+    public Hero(String name) {
+        super(name);
+    }
+
+    @Override
+    public void useSkill(Monster monster) {
+        System.out.println(name + "의 필살기!");
+        monster.takeDamage(50);
+    }
+}
+package com.ohgiraffers.Practice;
+
+public class Monster {
+    private int hp = 100;
+
+    public void attack(Fighter player) {
+        if (player.isDefending) {
+            System.out.println("방어 성공! 몬스터의 공격이 무효화됨!");
+            player.isDefending = false; // 방어 해제
+            return;
+        }
+        int damage = (int)(Math.random() * 11 + 10); // 10~20
+        System.out.println("몬스터의 공격! 데미지: " + damage);
+        Fighter.hp-=damage;
+        System.out.println("현재 내 hp:"+hp);
+    }
+
+    public void takeDamage(int damage) {
+        hp -= damage;
+        if (hp < 0) hp = 0;
+        System.out.println("몬스터가 " + damage + " 데미지를 입었습니다! (남은 HP: " + hp + ")");
+        Fighter.hp-=damage;
+    }
+
+    public boolean isDead() {
+        return hp <= 0;
+    }
+
+    public void showStatus() {
+        System.out.println("몬스터 HP: " + hp);
+    }
+}
+package com.ohgiraffers.Practice;
+
+public interface Skill {
+    void useSkill(Monster monster);
+}
