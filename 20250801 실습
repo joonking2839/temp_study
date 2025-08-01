@@ -1,0 +1,93 @@
+package com.ohgiraffers.hw1.model.dto;
+
+public class BookDTO {
+    private int bNO;
+    private int category;
+    private String title;
+    private String author;
+
+    public BookDTO(){}
+
+    public BookDTO(int bNO, int category, String title, String author) {
+        this.bNO = bNO;
+        this.category = category;
+        this.title = title;
+        this.author = author;
+    }
+
+    public int getbNO() {
+        return bNO;
+    }
+
+    public void setbNO(int bNO) {
+        this.bNO = bNO;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        String categoryName = switch (category) {
+            case 1 -> "인문";
+            case 2 -> "자연과학";
+            case 3 -> "의료";
+            case 4 -> "기타";
+            default -> "미분류";
+        };
+
+        return "BookDTO{" +
+                "bNO=" + bNO +
+                ", category=" + categoryName +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
+}
+package com.ohgiraffers.hw1.model.comparator;
+
+import com.ohgiraffers.hw1.model.dto.BookDTO;
+import java.util.Comparator;
+
+public class AscCategory implements Comparator<BookDTO> {
+
+    @Override
+    public int compare(BookDTO o1, BookDTO o2) {
+        return Integer.compare(o1.getCategory(), o2.getCategory());
+        // 작은 숫자가 먼저: 1 → 2 → 3 → 4
+    }
+}
+
+package com.ohgiraffers.hw1.model.comparator;
+
+import com.ohgiraffers.hw1.model.dto.BookDTO;
+import java.util.Comparator;
+
+public class DescCategory implements Comparator<BookDTO> {
+
+    @Override
+    public int compare(BookDTO o1, BookDTO o2) {
+        return Integer.compare(o2.getCategory(), o1.getCategory());
+    }
+}
