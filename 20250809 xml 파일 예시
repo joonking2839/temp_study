@@ -5,4 +5,4 @@
      INSERT INTO MYTEAM (TEAM_NAME, BUDGET, TACTICS)
      VALUES (?, ?, ?);
  </entry>
-</properties>
+</properties>ㅇ
