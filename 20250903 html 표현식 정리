@@ -1,0 +1,24 @@
+<h2>표현식 1 -변수 표현식 ${...]</h2>
+     <p th:text="${param.title}"></p>
+     <p th:text="${param.no[0]}"></p>
+     <p th:text="${param.no[1]}"></p>
+<!--     <p th:text="${param.no[2]}"></p>--><!---->
+ 전송한 파라미터 값 가져오기 가능
+
+    <h2>표현식 2 - 메세지 표현식 #{...}</h2>
+    <p th:text="#{message.value}"></p>
+     메세지 프로퍼티스에 있는 값 꺼내오기 가능
+
+    <h2>표현식3-링크 표현식 @{...}</h2>
+    <a th:href="@{/}">메인으로</a>
+    누르면 메인으로 가게 만들기 가능
+
+    <h2>표현식4-선택 변수 표현식 *{...}</h2>
+    <p th:text="${member.name}"></p>
+    <div th:object="${ member }">
+        <p th:text="*{age}"></p>
+        <p th:text="*{gender}"></p>
+        <p th:text="*{address}"></p>
+    </div>
+    
+    dto에 있는 get으로 값 가져오기 가능
