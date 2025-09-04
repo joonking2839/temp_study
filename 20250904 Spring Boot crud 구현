@@ -1,0 +1,115 @@
+spring boot로 crud 구현하기
+
+1.yml파일에 MySql Driver 정보와 mybatis 매핑 정보 작성
+##driver config
+spring:
+  datasource:
+    driver-class-name: 
+    url:
+    username: 
+    password:
+
+## mybatis config
+mybatis:
+  mapper-locations: mappers/**/*.xml
+
+2.DTO작성
+public class MenuDTO {
+
+    private int code;
+    private String name;
+    private int price;
+    private int categoryCode;
+    private String orderableStatus;
+
+3.Mapper 인터페이스(DAO)
+@Mapper
+public interface MenuMapper {
+
+    List<MenuDTO> findAllMenu();
+}
+
+4.Mapper xml
+<resultMap id="menuResultMap" type="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="price" column="menu_price"/>
+        <result property="categoryCode" column="category_code"/>
+        <result property="orderableStatus" column="orderable_status"/>
+    </resultMap>
+
+    <select id="findAllMenu" resultMap="menuResultMap">
+        select
+              menu_code
+             ,menu_name
+             ,menu_price
+             ,category_code
+             ,orderable_status
+           from tbl_menu
+           where orderable_status = 'y'
+           order by menu_code
+    </select>
+5.서비스 계층
+@Service
+public class MenuService {
+
+    private final MenuMapper menuMapper;
+
+    public MenuService(MenuMapper menuMapper){
+        this.menuMapper = menuMapper;
+    }
+    public List<MenuDTO> findAllMenu() {
+
+        return menuMapper.findAllMenu();
+    }
+6.컨트롤러 계층
+@Controller
+@RequestMapping("/menu")
+public class MenuController {
+
+    private final MenuService menuService;
+
+    public MenuController(MenuService menuService) {
+        this.menuService = menuService;
+    }
+
+    @GetMapping("list")
+    public String findMenuList(Model model){
+
+        List<MenuDTO> menuList = menuService.findAllMenu();
+
+        for (MenuDTO menus : menuList){
+            System.out.println(menus);
+        }
+
+        model.addAttribute("menuList",menuList);
+
+        return "menu/list";
+    }
+7.화면에 출력
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="common/header.html"></div>
+     <table align="center" border="1">
+         <tr>
+             <th>메뉴번호</th>
+             <th>메뉴이름</th>
+             <th>메뉴가격</th>
+             <th>카테고리코드</th>
+             <th>판매상태</th>
+         </tr>
+         <tr th:each="menu : ${ menuList }">
+             <td th:text="${ menu.code }"></td>
+             <td th:text="${ menu.name }"></td>
+             <td th:text="${ menu.price }"></td>
+             <td th:text="${ menu.categoryCode }"></td>
+             <td th:text="${ menu.orderableStatus }"></td>
+         </tr>
+     </table>
+</body>
+</html>
