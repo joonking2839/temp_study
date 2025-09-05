@@ -1,0 +1,348 @@
+1.컨트롤러
+@Controller
+@RequestMapping("/menu")
+public class MenuController {
+
+    private final MenuService menuService;
+
+    public MenuController(MenuService menuService) {
+        this.menuService = menuService;
+    }
+
+    @GetMapping("/list")
+    public String findMenuList(Model model){
+
+        List<MenuDTO> menuList = menuService.findAllMenu();
+
+        for (MenuDTO menus : menuList){
+            System.out.println(menus);
+        }
+
+        model.addAttribute("menuList",menuList);
+
+        return "menu/list";
+    }
+
+    @GetMapping("/regist")
+    public void registPage(){}
+
+    @GetMapping(value = "category", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<CategoryDTO> findCategoryList(){
+
+        menuService.findAllCategory().forEach(System.out::println);
+
+        return menuService.findAllCategory();
+    }
+
+    @PostMapping("/regist")
+    public String registMenu(MenuDTO newMenu, RedirectAttributes rttr){
+
+        menuService.registNewMenu(newMenu);
+
+        rttr.addFlashAttribute("successMessage","신규 메뉴 등록에 성공하였습니다");
+
+        return "redirect:/menu/list";
+    }
+
+    @GetMapping("/modify")
+    public void modifyMenu(){}
+
+    @GetMapping(value = "modifyCategory", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<CategoryDTO> modifyCategory(){
+
+        menuService.modifyCategory().forEach(System.out::println);
+
+        return menuService.modifyCategory();
+    }
+
+    @PostMapping("/modify")
+    public String modifyMenu(MenuDTO Menu, RedirectAttributes rttr){
+
+        menuService.modifyMenu(Menu);
+
+        rttr.addFlashAttribute("successMessage","메뉴 수정에 성공하였습니다");
+
+        return "redirect:/menu/list";
+    }
+
+    @GetMapping("/delete")
+    public void deleteMenu(){}
+
+    @PostMapping("/delete")
+    public String deleteMenu(MenuDTO menu, RedirectAttributes rttr){
+
+        menuService.deleteMenu(menu);
+
+        rttr.addFlashAttribute("successMessage","메뉴 삭제에 성공하였습니다");
+
+        return "redirect:/menu/list";
+    }
+
+2.서비스
+@Service
+public class MenuService {
+
+    private final MenuMapper menuMapper;
+
+    public MenuService(MenuMapper menuMapper){
+        this.menuMapper = menuMapper;
+    }
+    public List<MenuDTO> findAllMenu() {
+
+        return menuMapper.findAllMenu();
+    }
+
+    public List<CategoryDTO> findAllCategory() {
+
+        return menuMapper.findAllCategory();
+    }
+
+    @Transactional  //여러 메소드를 동시에 처리할때 한개가 실패하면서 여러 개 다 실패 처리함(롤백)
+    public void registNewMenu(MenuDTO newMenu) {
+
+         menuMapper.registNewMenu(newMenu);
+    }
+
+    public List<CategoryDTO> modifyCategory() {
+
+        return menuMapper.modifyCategory();
+    }
+
+    public void modifyMenu(MenuDTO menu) {
+
+        menuMapper.modifyMenu(menu);
+    }
+
+    public void deleteMenu(MenuDTO menu) {
+
+        menuMapper.deleteMenu(menu);
+    }
+    4.매퍼(DAO)
+    @Mapper
+public interface MenuMapper {
+
+    List<MenuDTO> findAllMenu();
+
+    List<CategoryDTO> findAllCategory();
+
+    void registNewMenu(MenuDTO newMenu);
+
+    List<CategoryDTO> modifyCategory();
+
+    void modifyMenu(MenuDTO menu);
+
+    void deleteMenu(MenuDTO menu);
+}
+5.쿼리
+<resultMap id="menuResultMap" type="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="price" column="menu_price"/>
+        <result property="categoryCode" column="category_code"/>
+        <result property="orderableStatus" column="orderable_status"/>
+    </resultMap>
+
+    <resultMap id="categoryResultMap" type="com.ohgiraffers.crud.menu.model.dto.CategoryDTO">
+        <id property="code" column="category_code"/>
+        <result property="name" column="category_name"/>
+        <result property="refCategoryCode" column="ref_category_code"/>
+    </resultMap>
+
+    <select id="findAllMenu" resultMap="menuResultMap">
+        select
+              menu_code
+             ,menu_name
+             ,menu_price
+             ,category_code
+             ,orderable_status
+           from tbl_menu
+           where orderable_status = 'y'
+           order by menu_code
+    </select>
+
+    <select id="findAllCategory" resultMap="categoryResultMap">
+        select
+              category_code
+             ,category_name
+             ,ref_category_code
+           from tbl_category
+    </select>
+
+    <insert id="registNewMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        insert into tbl_menu
+        (
+         menu_name
+        ,menu_price
+        ,category_code
+        ,orderable_status
+        )
+        values
+        (
+        #{ name }
+        ,#{ price }
+        ,#{ categoryCode}
+        ,#{ orderableStatus}
+        )
+
+    </insert>
+
+    <select id="modifyCategory" resultMap="categoryResultMap">
+        select
+        category_code
+        ,category_name
+        ,ref_category_code
+        from tbl_category
+    </select>
+
+    <update id="modifyMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        UPDATE tbl_menu
+        SET
+        menu_name = #{name},
+        menu_price = #{price},
+        category_code = #{categoryCode},
+        orderable_status = #{orderableStatus}
+        WHERE
+        menu_code = #{code}
+    </update>
+
+    <delete id="deleteMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        DELETE FROM tbl_menu
+        WHERE menu_code = #{code}
+    </delete>
+
+    6.화면출력
+    1)list
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    const successMessage = `[[${ successMessage }]]`
+    if (successMessage){
+        alert(successMessage)
+    }
+</script>
+<body>
+<div th:replace="common/header.html"></div>
+     <table align="center" border="1">
+         <tr>
+             <th>메뉴번호</th>
+             <th>메뉴이름</th>
+             <th>메뉴가격</th>
+             <th>카테고리코드</th>
+             <th>판매상태</th>
+         </tr>
+         <tr th:each="menu : ${ menuList }">
+             <td th:text="${ menu.code }"></td>
+             <td th:text="${ menu.name }"></td>
+             <td th:text="${ menu.price }"></td>
+             <td th:text="${ menu.categoryCode }"></td>
+             <td th:text="${ menu.orderableStatus }"></td>
+         </tr>
+     </table>
+</body>
+</html>
+2)<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+</style>
+<body>
+   <div th:replace="common/header.html"></div>
+   <form action="/menu/modify" method="post">
+     <h1>수정할 메뉴 코드</h1><input type="number" name="code"><br>
+         <h1>메뉴 수정</h1>
+     <label>수정할 메뉴이름 : </label><input type="text" name="name"><br>
+     <label>수정할메뉴가격 : </label><input type="number" name="price"><br>
+     <label>수정할 카테고리 코드</label>
+     <select name="categoryCode" id="categoryCode"></select><br>
+     <label>수정할 판매상태</label>
+     <select name="orderableStatus">
+       <option value="Y">Y</option>
+       <option value="N">N</option>
+     </select>
+     <input type="submit" value="전송">
+   </form>
+
+   <script>
+     fetch("/menu/category")
+             .then(res => res.json())
+             .then(data => {
+               console.log(data)
+
+               const $categoryCode = document.getElementById('categoryCode');
+
+               for (let index in data){
+                 const $option = document.createElement('option')
+                 $option.value=data[index].code;
+                 $option.textContent = data[index].name;
+                 $categoryCode.appendChild($option)
+               }
+             });
+   </script>
+</body>
+</html>
+3)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <div th:include="common/header.html"></div>
+     <h3>신규메뉴 등록</h3>
+     <form action="/menu/regist" method="post">
+       <label>메뉴이름 : </label><input type="text" name="name"><br>
+       <label>메뉴가격 : </label><input type="number" name="price"><br>
+       <label>카테고리 코드</label>
+       <select name="categoryCode" id="categoryCode"></select><br>
+       <label>판매상태</label>
+       <select name="orderableStatus">
+         <option value="Y">Y</option>
+         <option value="N">N</option>
+       </select>
+       <input type="submit" value="전송">
+     </form>
+
+     <script>
+        fetch("/menu/category")
+                .then(res => res.json())
+                .then(data => {
+                  console.log(data)
+
+                  const $categoryCode = document.getElementById('categoryCode');
+
+                  for (let index in data){
+                    const $option = document.createElement('option')
+                    $option.value=data[index].code;
+                    $option.textContent = data[index].name;
+                    $categoryCode.appendChild($option)
+                  }
+                });
+     </script>
+</body>
+</html>
+4)<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="common/header.html"></div>
+    <h1>메뉴삭제</h1>
+<form action="/menu/delete" method="post">
+  <h1>삭제할 메뉴 코드</h1>
+  <input type="number" name="code">
+  <input type="submit" value="전송">
+</form>
+</body>
+</html>
