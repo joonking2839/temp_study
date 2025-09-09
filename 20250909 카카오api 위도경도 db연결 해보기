@@ -1,0 +1,140 @@
+========yml========
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/productdb
+    username: ???
+    password: ???
+
+## mybatis config
+mybatis:
+  mapper-locations: mappers/**/*.xml
+
+
+@Controller
+@RequestMapping("/menu")
+public class KakaoController {
+
+    private final KakaoService kakaoService;
+
+    public KakaoController(KakaoService kakaoService) {
+        this.kakaoService = kakaoService;
+    }
+
+    @GetMapping("/kakao")
+    public String registOrder() {
+        return "menu/kakao";
+    }
+
+    @ResponseBody
+    @GetMapping("/markers")
+    public List<KaKaoMapDTO> markers(){
+         return kakaoService.getAllMarkers();
+    }
+ }
+
+ @Service
+public class KakaoService {
+    private final KakaoMapper kakaoMapper;
+
+    public KakaoService(KakaoMapper kakaoMapper) {
+        this.kakaoMapper = kakaoMapper;
+    }
+
+    public List<KaKaoMapDTO> getAllMarkers() {
+
+        return kakaoMapper.selectAllMarkers();
+    }
+}
+
+@Mapper
+public interface KakaoMapper {
+    List<KaKaoMapDTO> selectAllMarkers();
+}
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.kakaoapitest.menu.model.dao.KakaoMapper">
+    <resultMap id="kakaoMapSample" type="com.ohgiraffers.kakaoapitest.menu.model.dto.KaKaoMapDTO">
+        <id property="bikeNo" column="product_no"/>
+        <result property="franchise" column="franchise"/>
+        <result property="lat" column="lat"/>
+        <result property="lng" column="lng"/>
+        <result property="priority" column="priority"/>
+    </resultMap>
+
+    <select id="selectAllMarkers" resultMap="kakaoMapSample">
+        SELECT
+        product_no,
+        franchise,
+        lat,
+        lng,
+        priority
+        FROM bike_sample
+    </select>
+</mapper>
+
+ fetch('/menu/markers')
+          .then(res => {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(list => {
+            if (!Array.isArray(list) || list.length === 0) {
+              addBotMessage('표시할 자전거가 없습니다.');
+              return;
+            }
+
+            // 모든 마커가 보이도록 경계(Bounds) 계산
+            const bounds = new kakao.maps.LatLngBounds();
+
+            list.forEach(pos => {
+              // lat/lng가 숫자가 아닐 경우(잘못된 데이터) 건너뛰기
+              if (typeof pos.lat !== 'number' || typeof pos.lng !== 'number') return;
+
+              const latlng = new kakao.maps.LatLng(pos.lat, pos.lng);
+              bounds.extend(latlng);
+
+              // 실제 지도에 마커 추가
+              const marker = new kakao.maps.Marker({
+                map,
+                position: latlng,
+                title: pos.franchise ?? pos.bikeNo,  // 마우스오버 툴팁
+                image: markerImage
+              });
+
+              // 마커 클릭하면 상세 정보 카드/예약 버튼 활성화
+              kakao.maps.event.addListener(marker, 'click', () => {
+                lastSelected = {
+                  bikeNo:   pos.bikeNo,
+                  title:    pos.franchise || pos.bikeNo,
+                  lat:      pos.lat,
+                  lng:      pos.lng,
+                  priority: pos.priority
+                };
+
+                infoBox.style.display = "block";
+                infoBox.innerHTML = `
+              📍 <b>${lastSelected.title}</b><br>
+              자전거번호: ${lastSelected.bikeNo}<br>
+              위도: ${lastSelected.lat.toFixed(6)}<br>
+              경도: ${lastSelected.lng.toFixed(6)}<br>
+              우선순위: ${lastSelected.priority}
+            `;
+
+                reserveBtn.disabled = false;       // 예약 가능 상태로
+                chatBody.scrollTop = chatBody.scrollHeight;
+              });
+            });
+
+            // 마커가 여러 개라면 지도를 자동으로 맞춰줌
+            if (!bounds.isEmpty()) {
+              map.setBounds(bounds, 30, 30, 30, 30); // 여백(padding) 조금 넣기
+            }
+          })
+          .catch(err => {
+            console.error('마커 로드 실패:', err);
+            addBotMessage('마커 로드에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+          });
