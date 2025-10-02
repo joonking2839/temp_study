@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        
+        const { useReducer, useEffect, useState } = React;
+
+        function reducer(state, action){
+            return {
+                ...state,
+                [action.name]: action.value
+            }
+        }
+
+        function Practice(){
+            const [state, dispatch] = useReducer(reducer, { text: '' });
+            const { text } = state; 
+
+            const [userText, setUserText] = useState("");
+            const [count, setCount] = useState(0);
+            const [timer, setTimer] = useState(null);
+
+            useEffect(() => {
+                const input = prompt('문장을 입력해주세요!!');
+                setUserText(input);
+
+                let sec = 0;
+                const t = setInterval(() => {
+                    sec++;
+                    setCount(sec);
+                }, 1000);
+
+                setTimer(t);
+
+                return () => clearInterval(t);
+            }, []);
+
+            useEffect(() => {
+                if (text && text === userText) {    //TEXT초기값 '' PROMPT 초기값 ''
+                    alert(`걸린 시간: ${count}초`);
+                    clearInterval(timer);   
+                }
+            }, [text, userText, count]);
+
+            const onChangeHandler = (e) => {
+                dispatch({ name: e.target.name, value: e.target.value });
+            }
+
+            return (
+                <>
+                    <input 
+                        type="text" 
+                        name="text"
+                        value={text}
+                        onChange={onChangeHandler}
+                    />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Practice/>)
+    </script>
+</body>
+</html>
